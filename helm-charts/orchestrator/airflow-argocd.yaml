@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: airflow
+  namespace: argocd
+spec:
+  destination:
+    namespace: airflow
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/vinibeni2801/proj-stack-dados-k8s.git'
+    targetRevision: HEAD
+    path: ./helm-charts/orchestrator
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
